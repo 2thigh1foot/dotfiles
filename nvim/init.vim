@@ -1,7 +1,23 @@
+if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
+	echo "Downloading junegunn/vim-plug to manage plugins..."
+	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+	autocmd VimEnter * PlugInstall
+endif
+
 set exrc
 
+set t_Co=256                       " Enable 256 colors
+set termguicolors                  " Enable GUI colors for the terminal to get truecolor
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" This must be loaded after we set termguicolors
+" This is giving tons of errors, will figure out later
+" lua require('init')
 
 call plug#begin('~/.config/nvim/plugged')
+
 " Black formatting
 Plug 'ambv/black'
 
@@ -25,36 +41,39 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'ThePrimeagen/vim-be-good'
 
 Plug 'gruvbox-community/gruvbox'
+
+" Tmux and Vim Together at Last!
+Plug 'hupfdule/vimux'
+
+" Colors and what not
+Plug 'norcalli/nvim-colorizer.lua' " This brings me the most joy
+Plug 'norcalli/nvim-terminal.lua'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+
 call plug#end()
 
-set termguicolors                  " Enable GUI colors for the terminal to get truecolor
-" set t_Co=256                     " Enable 256 colors
-"
-
-" Tree sitter installs
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 
 let loaded_matchparen = 1
 let mapleader = " "
 
-colorscheme gruvbox
-highlight Normal guibg=none
+function! CheckBackSpace() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
 
-let g:UltiSnipsExpandTrigger = "<S-Tab>"
+" =====================================
+" ======== Completion Settings ========
+" =====================================
+inoremap <silent><expr> <c-p> completion#trigger_completion()
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ CheckBackSpace() ? "\<TAB>" :
+  \ completion#trigger_completion()
+
 let g:completion_enable_snippet = 'UltiSnips'
+"" Why is this not grabbing from mysnippets folder?
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+let g:UltiSnipsExpandTrigger = "<S-Tab>"
 
 autocmd BufEnter * lua require'completion'.on_attach()
-
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
-
-augroup TRIM_WS
-    autocmd!
-    autocmd BufWritePre * :call TrimWhitespace()
-    autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
-augroup END
-
-

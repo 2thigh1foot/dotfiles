@@ -1,36 +1,58 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 EDITOR="nvim"
+
+[ -f "$HOME/.config/shells/profile" ] && source "$HOME/.config/shells/profile"
+
+autoload -U colors && colors
+
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+setopt autocd		# Automatically cd into typed directory.
+stty stop undef		# Disable ctrl-s to freeze terminal.
+setopt interactive_comments
+
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+
+# Include hidden files in autocomplete:
+_comp_options+=(globdots)
+
 
 set -o vi
 alias vim="nvim"
+
+# History in cache directory:
+HISTSIZE=10000000
+SAVEHIST=10000000
+HISTFILE=~/.cache/zsh/history
+
+
 # Test comment to check link
 alias python="python3"
 
+
 # pyenv evals
-export PATH="/home/ciante/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+#export PATH="/home/ciante/.pyenv/bin:$PATH"
+#eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
+
+export PATH="/home/ciante/.local/bin:$PATH"
+
 
 # golang path stuff
 export PATH="$PATH:$HOME/go/bin"
 export PATH=$PATH:/usr/local/go/bin
 
+
 # stop ls highlighting
 export LS_COLORS=$LS_COLORS:'ow=1;34:';
 
-# faux open command
-alias open="cmd.exe /C start"
+export NVIMP="~/.config/nvim"
+
+alias lsplog="tail -f ~/.local/share/nvim/lsp.log"
+
 
 # ignore case cd
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
