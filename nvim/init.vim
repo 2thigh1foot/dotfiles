@@ -1,7 +1,7 @@
-if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
+if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+	silent !mkdir -p ~/.config/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
 endif
 
@@ -24,6 +24,7 @@ Plug 'ambv/black'
 Plug 'SirVer/ultisnips'
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'francoiscabrol/ranger.vim'
 
 " Neovim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
@@ -73,7 +74,11 @@ inoremap <silent><expr> <TAB>
 
 let g:completion_enable_snippet = 'UltiSnips'
 "" Why is this not grabbing from mysnippets folder?
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
+"" let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 let g:UltiSnipsExpandTrigger = "<S-Tab>"
+
+"" Ranger Stuffs
+let g:ranger_map_keys = 0
+nnoremap <leader>r :Ranger<CR>
 
 autocmd BufEnter * lua require'completion'.on_attach()

@@ -1,6 +1,6 @@
 # Adds `~/.local/bin` to $PATH
-export PATH="$PATH:${$(find ~/.local/bin -type d -printf %p:)%%:}"
 
+export PATH="~/.local/bin:$PATH"
 unsetopt PROMPT_SP
 
 # Default programs:

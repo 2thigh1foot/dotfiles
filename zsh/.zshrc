@@ -1,6 +1,5 @@
 EDITOR="nvim"
 
-[ -f "$HOME/.config/shells/profile" ] && source "$HOME/.config/shells/profile"
 
 autoload -U colors && colors
 
@@ -17,9 +16,15 @@ compinit
 # Include hidden files in autocomplete:
 _comp_options+=(globdots)
 
+EDITOR="nvim"
 
 set -o vi
+
 alias vim="nvim"
+
+# Load aliases and shortcuts
+[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+[ -f "$HOME/.config/shells/profile" ] && source "$HOME/.config/shells/profile"
 
 # History in cache directory:
 HISTSIZE=10000000

@@ -14,4 +14,4 @@ main:
 	stow --dotfiles -R --verbose=3 -t ~/.config/zsh zsh
 	stow --dotfiles -R --verbose=3 -t ~/.config/shell shell
 	stow --dotfiles -R --verbose=3 -t ~/.config/fontconfig fontconfig
-	stow --dotfiles -R --verbose=3 -t ~/.config aliases
+	stow --dotfiles -R --verbose=3 -t ~/.config/aliases aliases
