@@ -57,6 +57,8 @@ call plug#end()
 let loaded_matchparen = 1
 let mapleader = " "
 
+lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+
 function! CheckBackSpace() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'

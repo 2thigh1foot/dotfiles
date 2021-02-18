@@ -1,11 +1,11 @@
 TMUX_CONFIG="~/.config/tmux/.tmux.conf"
 
 # TMUX Aliases
-alias					\
-  tn="tmux -u -f $TMUX_CONFIG new"	\
+alias					                \
+  tn="tmux -u -f $TMUX_CONFIG new"	    \
   ta="tmux -u -f $TMUX_CONFIG attach"  	\
   tt="nvim $TMUX_CONFIG"
 
-alias					\
+alias					                \
+  zc="nvim ~/dev/.dotfiles/zsh/.zshrc"  \
   rc="source ~/.config/zsh/.zshrc"
-

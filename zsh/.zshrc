@@ -3,7 +3,9 @@ EDITOR="nvim"
 
 autoload -U colors && colors
 
+
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+
 setopt autocd		# Automatically cd into typed directory.
 stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
@@ -34,12 +36,13 @@ HISTFILE=~/.cache/zsh/history
 
 # Test comment to check link
 alias python="python3"
+alias pip="pip3"
 
 
 # pyenv evals
-#export PATH="/home/ciante/.pyenv/bin:$PATH"
-#eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
+export PATH="/home/ciante/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 export PATH="/home/ciante/.local/bin:$PATH"
 
@@ -55,7 +58,6 @@ export LS_COLORS=$LS_COLORS:'ow=1;34:';
 export NVIMP="~/.config/nvim"
 
 alias lsplog="tail -f ~/.local/share/nvim/lsp.log"
-
 
 # ignore case cd
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' '+m:{A-Z}={a-z}'

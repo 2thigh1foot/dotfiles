@@ -1,7 +1,6 @@
 # Adds `~/.local/bin` to $PATH
 
 export PATH="~/.local/bin:$PATH"
-unsetopt PROMPT_SP
 
 # Default programs:
 export EDITOR="nvim"
