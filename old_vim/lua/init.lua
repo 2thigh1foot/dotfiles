@@ -15,14 +15,14 @@
 -- L::::::::::::::::::::::L   UU:::::::::UU A:::::A                 A:::::A
 -- LLLLLLLLLLLLLLLLLLLLLLLL     UUUUUUUUU  AAAAAAA                   AAAAAAA
 
-local nvim_lsp = require'lspconfig'
+local nvim_lsp = require('lspconfig')
 
 local mapper = function(mode, key, result)
   vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = true, silent = true})
 end
 
 local on_attach_vim = function(client)
-  require'completion'.on_attach(client)
+  require('completion').on_attach(client)
 end
 
 local on_attach_vim_plus_keymaps = function(client)
@@ -54,7 +54,7 @@ nvim_lsp.gopls.setup{
 }
 
 
-require'colorizer'.setup()
+require('colorizer').setup()
 
 
 -- Why do I need this?

@@ -8,4 +8,6 @@ alias					                \
 
 alias					                \
   zc="nvim ~/dev/.dotfiles/zsh/.zshrc"  \
-  rc="source ~/.config/zsh/.zshrc"
+  rc="source ~/.config/zsh/.zshrc"      \
+  sl="ls -a"                            \
+  l="ls -alt"

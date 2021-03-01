@@ -14,7 +14,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " This must be loaded after we set termguicolors
 " This is giving tons of errors, will figure out later
-" lua require('init')
+lua require('init')
 
 call plug#begin('~/.config/nvim/plugged')
 
@@ -45,6 +45,8 @@ Plug 'gruvbox-community/gruvbox'
 
 " Tmux and Vim Together at Last!
 Plug 'hupfdule/vimux'
+
+Plug 'vimwiki/vimwiki'
 
 " Colors and what not
 Plug 'norcalli/nvim-colorizer.lua' " This brings me the most joy
@@ -78,6 +80,16 @@ let g:completion_enable_snippet = 'UltiSnips'
 "" Why is this not grabbing from mysnippets folder?
 "" let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 let g:UltiSnipsExpandTrigger = "<S-Tab>"
+
+
+let wiki = {}
+let wiki.path = '~/dev/journals'
+let wiki.path_html = '~/dev/journals/html'
+let wiki.syntax = 'default'
+let wiki.ext = '.md'
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
 
 "" Ranger Stuffs
 let g:ranger_map_keys = 0

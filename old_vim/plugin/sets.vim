@@ -19,10 +19,11 @@ set noshowmode
 set signcolumn=yes
 set isfname+=@-@
 set ls=0
-set nocompatible
 
+set nocompatible
 filetype plugin on
 syntax on
+
 set encoding=utf-8
 
 colorscheme challenger_deep
